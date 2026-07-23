@@ -10,7 +10,7 @@ export default function StyleGuide() {
 
   return (
     <div className="min-h-screen bg-page p-8 flex flex-col gap-10 max-w-xl mx-auto">
-      <h1 className="text-2xl">Susu — Design System</h1>
+      <h1 className="text-2xl">TunchiCoop</h1>
 
       <section className="flex flex-col gap-3">
         <p className="label-caption">Buttons</p>
