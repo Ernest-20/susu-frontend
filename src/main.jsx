@@ -1,11 +1,11 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import CreatePlans from './pages/plans/CreatePlans.jsx'
-// render <CreatePlan />
+import GroupDashboard from './pages/groups/GroupDashboard.jsx'
+// render <GroupDashboard />
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <CreatePlans />
+    <GroupDashboard/>
   </StrictMode>,
 )
