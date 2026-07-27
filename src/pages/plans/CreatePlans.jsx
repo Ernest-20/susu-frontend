@@ -42,7 +42,7 @@ export default function CreatePlan() {
 
   return (
     <div className="min-h-screen bg-page flex items-center justify-center p-6">
-      <Card className="w-full max-w-sm">
+      <Card className="w-full max-w-sm md:max-w-md">
         <div className="flex items-center gap-2 mb-1">
           <button aria-label="Back" className="text-ink-muted">←</button>
           <h1 className="text-xl">New plan</h1>

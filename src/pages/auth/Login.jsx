@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolver/zod";
-import { loginSchema } from "../../utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema } from "../../utils/validation";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Card from "../../components/Card";
@@ -19,7 +19,7 @@ export default function Login() {
 
     return (
         <div className="min-h-screen bg-page flex items-center justify-center p-6">
-            <Card className="w-full max-w-sm">
+            <Card className="w-full max-w-sm md:max-w-md">
                 <h1 className="text-xl mb-1">Welcome back</h1>
                 <p className="text-sm text-ink-muted mb-6">log in to track your savings</p>
 

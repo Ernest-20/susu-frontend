@@ -46,7 +46,7 @@ export default function GroupDashboard() {
         </div>
       </header>
 
-      <main className="max-w-2xl mx-auto px-6 flex flex-col gap-6">
+      <main className="max-w-2xl lg:max-w-3xl mx-auto px-6 md:px-8 flex flex-col gap-6">
         {/* Group balance */}
         <Card variant="solid">
           <p className="text-xs uppercase text-white/60 mb-1">
@@ -61,7 +61,7 @@ export default function GroupDashboard() {
         {/* Members list */}
         <div>
           <p className="label-caption mb-3">Members</p>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 md:grid md:grid-col-2 md:gap-3">
             {MOCK_MEMBERS.map((member) => (
               <Card
                 key={member.id}
