@@ -1,11 +1,11 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import GroupDashboard from './pages/groups/GroupDashboard'
-// render <GroupDashboard />
+import AdminApproval from './pages/groups/AdminApproval.jsx'
+// render <AdminApproval />
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <GroupDashboard/>
+    <AdminApproval/>
   </StrictMode>,
 )
