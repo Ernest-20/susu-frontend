@@ -1,11 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import AdminApproval from './pages/groups/AdminApproval.jsx'
+import Marketplace from './pages/marketplace/Marketplace.jsx'
+// render <Marketplace />
 // render <AdminApproval />
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AdminApproval/>
+    <Marketplace/>
   </StrictMode>,
 )
