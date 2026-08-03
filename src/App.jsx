@@ -1,122 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+// This codes defines route in the app
+// This file the "map" of the whole app: it says which component
+// should render for each URL path. it displays all the screen built
 
-function App() {
-  const [count, setCount] = useState(0)
+import { Routes, Route, Navigate } from "react-router-dom";
 
+// layout
+import AppLayout from "./layouts/AppLayouts";
+
+// Auth screens
+import Register from "./pages/auth/Register";
+import Login from "./pages/auth/Login";
+
+// Screens that Do show tab bar
+import Dashboard from "./pages/dashboard/Dashboard";
+import CreatePlan from "./pages/plans/CreatePlan";
+import GroupDashboard from "./pages/groups/GroupDashboard";
+import AdminApproval from "./pages/groups/AdminApproval";
+import Marketplace from "./pages/marketplace/Marketplace";
+import TransactionHistory from "./pages/transactions/TransactionHistory";
+// Notifications
+import Profile from "./pages/profile/Profile";
+import KycVerification from "./pages/profile/KycVerification";
+import Notifications from "./pages/notifications/Notifications";
+
+export default function App () {
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <Routes>
+      {/* Auth routes - standalone, no tab bar wrapping them */}
+      <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/kyc" element={<KycVerification />} />
 
-      <div className="ticks"></div>
+      {/*
+      Nesting everthing in this <Route>  automatically get wrapped
+      in AppLayout (meaning: it gets the bottom tabbar for free).
+      This is what "element={<AppLayout />}" + nested <Route> children means
+       */}
+      <Route element={<AppLayout />}>
+       <Route path="/dashboard" element={<Dashboard />} />
+       <Route path="/plans/new" element={<CreatePlan />} />
+       <Route path="/groups" element={<GroupDashboard />} />
+       <Route path="/groups/approvals" element={<AdminApproval />} />
+       <Route path="/marketplace" element={<Marketplace />} />
+       <Route path="/transactions" element={<TransactionHistory />} />
+       <Route path="/notifications" element={<Notifications />} />
+       <Route path="/profile" element={<Profile />} />
+       </Route>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+       {/*
+       Catch-all: if someone visits a URL that doesn't match above (or just opens sute at "/"), send them to the dashboard instead of showing broken/ blank page.
+        */}
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+    </Routes>
+  );
 }
-
-export default App

@@ -2,9 +2,6 @@ import Card from "../../components/Card";
 import Button from "../../components/Button";
 
 // Maps each verification status to badge styling and readable text.
-// "unverified" = user hasn't started KYC yet
-// "pending" = documents submitted, awaiting review
-// "verified" = fully approved
 const verificationStyles = {
   unverified: {
     classes: "bg-page text-ink-muted border-line",
@@ -20,19 +17,39 @@ const verificationStyles = {
   },
 };
 
+// A single row in the settings list. Keeping this as its own small
+// component avoids repeating the same className string 4 times below,
+// and makes it easy to add an icon or change the style in ONE place later.
+function SettingsRow({ label, danger = false, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`w-full flex items-center justify-between text-left px-4 py-3.5 text-sm
+        border-b border-line last:border-b-0
+        hover:bg-page transition
+        ${danger ? "text-danger-500" : "text-ink"}`}
+    >
+      <span>{label}</span>
+      {/* Simple chevron to hint these rows are tappable/navigable */}
+      <span className="text-ink-muted">›</span>
+    </button>
+  );
+}
+
 export default function Profile() {
-  // MOCK DATA — later this comes from the logged-in user's account data.
+  // MOCK DATA — later this comes from the logged-in user's account data
+  // (or from useAuthStore once we wire that in).
   const user = {
     fullName: "Ernest Acquah",
     phone: "+233 XX XXX XXXX",
     accountType: "Individual",
-    verificationStatus: "unverified", // try changing to "pending" or "verified" to see the badge change
+    verificationStatus: "unverified",
   };
 
   const statusInfo = verificationStyles[user.verificationStatus];
 
   return (
-    <div className="min-h-screen bg-page pb-10">
+    <div className="min-h-screen bg-page pb-24">
       <header className="p-6 max-w-2xl mx-auto">
         <h1 className="text-xl">Profile</h1>
       </header>
@@ -41,8 +58,7 @@ export default function Profile() {
         {/* Basic account info card */}
         <Card className="flex flex-col gap-3">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-brand-50 text-brand-700 font-semibold flex items-center justify-center">
-              {/* Simple initials avatar, built from the first letters of each word in the name */}
+            <div className="w-12 h-12 rounded-full bg-brand-50 text-brand-700 font-semibold flex items-center justify-center flex-shrink-0">
               {user.fullName
                 .split(" ")
                 .map((word) => word[0])
@@ -60,19 +76,20 @@ export default function Profile() {
           </div>
         </Card>
 
-        {/* Verification status card — links out to the KYC screen */}
-        <Card className="flex items-center justify-between">
+        {/* Verification status card */}
+        <Card className="flex items-center justify-between gap-4">
           <div>
-            <p className="text-sm font-semibold text-ink mb-1">Identity verification</p>
+            <p className="text-sm font-semibold text-ink mb-1.5">
+              Identity verification
+            </p>
             <span
               className={`inline-block text-xs font-semibold px-3 py-1 rounded-pill border ${statusInfo.classes}`}
             >
               {statusInfo.label}
             </span>
           </div>
-          {/* Only show the "Complete" button if not yet verified */}
           {user.verificationStatus !== "verified" && (
-            <a href="/kyc">
+            <a href="/kyc" className="flex-shrink-0">
               <Button variant="outline" size="sm">
                 {user.verificationStatus === "pending" ? "View status" : "Complete now"}
               </Button>
@@ -80,20 +97,16 @@ export default function Profile() {
           )}
         </Card>
 
-        {/* Settings list — placeholders for now, each would open its own screen later */}
-        <Card className="flex flex-col divide-y divide-line">
-          <button className="text-left py-3 text-sm text-ink first:pt-0">
-            Edit profile details
-          </button>
-          <button className="text-left py-3 text-sm text-ink">
-            Notification preferences
-          </button>
-          <button className="text-left py-3 text-sm text-ink">
-            Change password
-          </button>
-          <button className="text-left py-3 text-sm text-danger-500 last:pb-0">
-            Log out
-          </button>
+        {/*
+          Settings list — using the SettingsRow component above.
+          Padding is set to 0 on the Card itself since each row provides
+          its own internal padding, keeping the borders flush edge-to-edge.
+        */}
+        <Card className="p-0 overflow-hidden">
+          <SettingsRow label="Edit profile details" onClick={() => console.log("Edit profile")} />
+          <SettingsRow label="Notification preferences" onClick={() => console.log("Notifications")} />
+          <SettingsRow label="Change password" onClick={() => console.log("Change password")} />
+          <SettingsRow label="Log out" danger onClick={() => console.log("Log out")} />
         </Card>
       </main>
     </div>
