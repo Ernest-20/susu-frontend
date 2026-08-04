@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "../../utils/validation";
+import { registerUser } from "../../services/authService";
+import useAuthStore from "../../store/useAuthStore";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import Toggle from "../../components/Toggle";
@@ -9,6 +12,14 @@ import Card from "../../components/Card";
 
 export default function Register() {
   const [accountType, setAccountType] = useState("individual");
+
+  // useNavigate lets us send the user to a different page FROM CODE
+  // (e.g. after a successful submit), rather than only via clickable links.
+  const navigate = useNavigate();
+
+  // Pulls just the setUser action out of our Zustand store.
+  // Calling this will update the shared user data every screen can see.
+  const setUser = useAuthStore((state) => state.setUser);
 
   const {
     register,
@@ -26,8 +37,22 @@ export default function Register() {
   };
 
   const onSubmit = async (data) => {
-    // replace with real API call once backend is live!
-    console.log("Register payload:", data);
+    try {
+      // Call our mock service — this simulates a real API request/response.
+      const response = await registerUser(data);
+
+      // Save the returned user into our shared Zustand store, so the
+      // Dashboard, Profile, etc. all immediately know who's logged in.
+      setUser(response.user);
+
+      // Send the user to their dashboard now that "registration" succeeded.
+      navigate("/dashboard");
+    } catch (error) {
+      // If something goes wrong (once this is a REAL API call, this could be
+      // a duplicate phone number, server error, etc.), log it for now.
+      // Later, this is where you'd show an error message in the UI.
+      console.error("Registration failed:", error);
+    }
   };
 
   return (
