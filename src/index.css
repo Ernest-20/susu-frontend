@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@theme {
+:root {
   --color-ink: #1A1A1A;
   --color-ink-soft: #444444;
   --color-ink-muted: #6B6B6B;
@@ -23,15 +23,22 @@
     font-family: "Inter", system-ui, sans-serif;
   }
   body {
-    @apply bg-page text-ink antialiased;
+    background-color: var(--color-page);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   h1, h2, h3 {
-    @apply font-semibold text-ink;
+    font-weight: 600;
+    color: var(--color-ink);
   }
 }
 
 @layer utilities {
   .label-caption {
-    @apply text-xs uppercase tracking-wide text-ink-muted;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-ink-muted);
   }
 }

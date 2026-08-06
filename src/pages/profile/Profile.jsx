@@ -1,5 +1,6 @@
 import Card from "../../components/Card";
 import Button from "../../components/Button";
+import { Link } from "react-router-dom";
 
 // Maps each verification status to badge styling and readable text.
 const verificationStyles = {
@@ -89,11 +90,11 @@ export default function Profile() {
             </span>
           </div>
           {user.verificationStatus !== "verified" && (
-            <a href="/kyc" className="flex-shrink-0">
+            <Link to="/kyc" className="flex-shrink-0">
               <Button variant="outline" size="sm">
                 {user.verificationStatus === "pending" ? "View status" : "Complete now"}
               </Button>
-            </a>
+            </Link>
           )}
         </Card>
 
