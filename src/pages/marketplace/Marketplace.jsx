@@ -125,7 +125,11 @@ export default function Marketplace() {
 
             {filteredProducts.map((product) => (
                 <Card key={product.id} className="flex gap-4 p-4">
-                    <div className="w-16 h-16 rounded-md bg-page border border-line flex items-center justify-center text-xs text-ink-muted flex-shrink-0">
+                    <div
+                      role="img"
+                      arial-label={`${product.name} product image`}
+                      classname="w-16 rounded-md bg-page border border-line flex items-center justify-center text-xs text-ink-muted flex-shrink-0"
+                    >
                         img
                     </div>
 
