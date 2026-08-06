@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #1A1A1A;
+   --color-ink: #1A1A1A;
   --color-ink-soft: #444444;
-  --color-ink-muted: #6B6B;
+  --color-ink-muted: #6B6B6B;
   --color-line: #C7C7C7;
   --color-line-strong: #8A8A8A;
   --color-page: #F7F7F5;
@@ -13,6 +13,8 @@
   --color-brand-500: #1E8A5C;
   --color-brand-600: #166E48;
   --color-brand-700: #0F5236;
+  --color-warn-100: #FDF3E0;
+  --color-warn-500: #C98A1F;
   --color-danger-100: #FBE8E8;
   --color-danger-500: #C13B3B;
   --radius-pill: 999px;
