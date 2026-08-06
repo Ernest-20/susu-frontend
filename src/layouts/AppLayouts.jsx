@@ -7,7 +7,7 @@ const TABS = [
     { label: "Home", path: "/dashboard" },
     { label: "Savings", path: "/plans/new" },
     { label: "Groups", path: "/groups" },
-    { label: "Shop", path: "/shop" },
+    { label: "Shop", path: "/marketplace" },
     { label: "Profile", path: "/profile" },
 ];
 

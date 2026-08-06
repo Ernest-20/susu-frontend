@@ -5,7 +5,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
 // layout
-import AppLayout from "./layouts/AppLayouts";
+import AppLayout from "./layouts/Applayout";
 
 // Auth screens
 import Register from "./pages/auth/Register";
